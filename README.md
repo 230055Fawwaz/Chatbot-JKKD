@@ -9,3 +9,4 @@ Tech Stack:
 - Jenis Model: SLM (Small Language Models)
 - Framework AI: RAG (Retrieval-Augmented Generation)
 - Data: PDF materi kuliah dan file Markdown (.md)
+- Database: SQLite Vector
