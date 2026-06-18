@@ -1,0 +1,21 @@
+<!--
+    Nama File: chat.html
+    Deskripsi: Halaman chat
+    Penulis:   Fawwaz Yaqzhan
+    Tanggal:   18-06-2026
+    Catatan:
+      - Memberikan layanan chat/conversation dengan model AI
+-->
+
+{% extends "base.html" %}
+{% block title %} <!-- Judul --> {% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/chat.css') }}">
+{% endblock %}
+{% block content %}
+    <!-- Isi konten web -->
+{% endblock %}
+{% block extra_js %}
+    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+{% endblock %}
