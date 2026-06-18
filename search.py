@@ -7,6 +7,7 @@
 #   - Menerima pertanyaan user (menerima prompt)
 #   - Mengubah pertanyaan (prompt) menjadi vektor
 #   - Mencari potongan teks materi kuliah yang sesuai
+#   - Sebagai media debugging jika RAG berkata "Materi tidak ada"
 # ==========================================
 
 import sqlite3
