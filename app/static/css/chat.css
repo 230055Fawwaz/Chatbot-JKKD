@@ -6,3 +6,117 @@
    Catatan:
      - Mengatur tampilan halaman chat
    ========================================== */
+
+   /* app/static/css/chat.css */
+
+/* Reset & Container Utama */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1e1e2e;
+    color: #cdd6f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.chat-container {
+    width: 100%;
+    max-width: 800px;
+    height: 85vh;
+    background-color: #252538;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Header */
+.chat-header {
+    background-color: #11111b;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #313244;
+}
+
+.chat-header h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #cba6f7;
+}
+
+.status-badge {
+    background-color: #a6e3a1;
+    color: #11111b;
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+/* Area Box Chat */
+.chat-box {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: #181825;
+}
+
+/* Gelembung Pesan (Chat Bubbles) */
+.message {
+    max-width: 75%;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    word-wrap: break-word;
+    white-space: pre-line; /* Menjaga struktur paragraf baru dari AI */
+}
+
+.bot-message {
+    background-color: #313244;
+    color: #cdd6f4;
+    align-self: flex-start;
+    border-bottom-left-radius: 2px;
+}
+
+.user-message {
+    background-color: #89b4fa;
+    color: #11111b;
+    align-self: flex-end;
+    border-bottom-right-radius: 2px;
+}
+
+/* Status Khusus */
+.loading {
+    font-style: italic;
+    color: #a6adc8;
+    background-color: transparent;
+    padding: 5px;
+}
+
+.error {
+    background-color: #f38ba8;
+    color: #11111b;
+}
+
+/* Area Input Form */
+.chat-input-area {
+    display: flex;
+    padding: 15px;
+    background-color: #1e1e2e;
+    border-top: 1px solid #313244;
+    gap: 10px;
+}
+
+.chat-input-area input {
+    flex: 1;
+}
