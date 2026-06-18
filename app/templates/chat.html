@@ -8,14 +8,33 @@
 -->
 
 {% extends "base.html" %}
-{% block title %} <!-- Judul --> {% endblock %}
+
+{% block title %}Asisten Kuliah JKKD{% endblock %}
+
 {% block extra_css %}
-    <link rel="stylesheet"
-        href="{{ url_for('static', filename='css/chat.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
 {% endblock %}
+
 {% block content %}
-    <!-- Isi konten web -->
+<div class="chat-container">
+    <div class="chat-header">
+        <h2>🤖 Chatbot Materi Kuliah</h2>
+        <span class="status-badge">Offline Mode</span>
+    </div>
+
+    <div class="chat-box" id="chatBox">
+        <div class="message bot-message">
+            Halo! Aku asisten kuliah lokalmu. Ada materi kuliah yang ingin kamu tanyakan hari ini?
+        </div>
+    </div>
+
+    <form class="chat-input-area" id="chatForm">
+        <input type="text" id="userInput" placeholder="Tanyakan sesuatu tentang materi kuliah..." autocomplete="off" required>
+        <button type="submit" id="sendBtn">Kirim</button>
+    </form>
+</div>
 {% endblock %}
+
 {% block extra_js %}
     <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
 {% endblock %}
