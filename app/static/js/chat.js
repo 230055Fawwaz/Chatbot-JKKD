@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch('/api/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message: pesanUser })
+                body: JSON.stringify({ message: pesanUser }),
             });
 
             // Hapus status loading awal
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Dekode biner menjadi teks string
                 const chunk = decoder.decode(value, { stream: true });
-                
+
                 // Pisahkan baris karena format SSE diawali dengan "data: "
                 const lines = chunk.split('\n');
                 for (const line of lines) {
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         const rawJson = line.replace('data: ', '').trim();
                         try {
                             const parsed = JSON.parse(rawJson);
-                            
+
                             if (parsed.type === 'sources') {
                                 sourcesData = parsed.content;
                             } else if (parsed.type === 'token') {
@@ -91,7 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 sumberDiv.innerHTML = `📚 <strong>Sumber materi:</strong> ${sourcesData.join(', ')}`;
                 pesanDiv.appendChild(sumberDiv);
             }
-
         } catch (error) {
             console.error('Error:', error);
             hapusLoading(loadingId);
@@ -104,19 +103,19 @@ document.addEventListener('DOMContentLoaded', () => {
         chatBox.innerHTML = '';
 
         // 2. Tampilkan kembali pesan sambutan awal dari bot
-        const pesanAwal = "Halo! Aku asisten kuliah lokalmu. Ada materi kuliah yang ingin kamu tanyakan hari ini?";
+        const pesanAwal = 'Halo! Aku asisten kuliah lokalmu. Ada materi kuliah yang ingin kamu tanyakan hari ini?';
         tampilkanPesan(pesanAwal, 'bot-message');
     });
 
     function tampilkanPesan(teks, tipeKelas, sources = []) {
         const pesanDiv = document.createElement('div');
         pesanDiv.className = `message ${tipeKelas}`;
-        
+
         // Buat element penampung teks utama
         const teksSpan = document.createElement('span');
         teksSpan.textContent = teks;
         pesanDiv.appendChild(teksSpan);
-        
+
         // JIKA ada data sumber dokumen, tampilkan di bawah teks utama
         if (sources && sources.length > 0) {
             const sumberDiv = document.createElement('div');
@@ -125,12 +124,12 @@ document.addEventListener('DOMContentLoaded', () => {
             sumberDiv.style.marginTop = '8px';
             sumberDiv.style.borderTop = '1px solid #45475a';
             sumberDiv.style.paddingTop = '4px';
-            
+
             // Gabungkan nama file dengan koma
             sumberDiv.innerHTML = `📚 <strong>Sumber materi:</strong> ${sources.join(', ')}`;
             pesanDiv.appendChild(sumberDiv);
         }
-        
+
         // Jika tipeKelas memuat loading status
         if (tipeKelas.includes('loading')) {
             const idUnique = 'load-' + Date.now();

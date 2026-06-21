@@ -7,16 +7,16 @@
 //   - Mengatur interaksi user di base.html
 // ==========================================
 
-document.addEventListener("DOMContentLoaded", function () {
-  /* =========================================
+document.addEventListener('DOMContentLoaded', function () {
+    /* =========================================
        Logika Collapsible Menu (Sidebar)
     ========================================= */
-  const sidebar = document.getElementById("sidebar");
-  const toggleBtn = document.getElementById("toggle-btn");
+    const sidebar = document.getElementById('sidebar');
+    const toggleBtn = document.getElementById('toggle-btn');
 
-  if (toggleBtn && sidebar) {
-    toggleBtn.addEventListener("click", function () {
-      sidebar.classList.toggle("collapsed");
-    });
-  }
+    if (toggleBtn && sidebar) {
+        toggleBtn.addEventListener('click', function () {
+            sidebar.classList.toggle('collapsed');
+        });
+    }
 });

@@ -6,38 +6,42 @@
     Catatan:
       - Memberikan layanan chat/conversation dengan model AI
 -->
-
 {% extends "base.html" %}
-
 {% block title %}Asisten Kuliah JKKD{% endblock %}
 
-{% block extra_css %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
-{% endblock %}
+    {% block extra_css %}
 
-{% block content %}
-<div class="chat-container">
-    <div class="chat-header">
-        <h2>🤖 Chatbot Materi Kuliah</h2>
-        <div class="header-actions">
-            <button type="button" id="newChatBtn" class="new-chat-btn">+ New Chat</button>
-            <span class="status-badge">Offline Mode</span>
+        <link rel="stylesheet"
+              href="{{ url_for('static', filename='css/chat.css') }}">
+    {% endblock %}
+
+    {% block content %}
+
+        <div class="chat-container">
+            <div class="chat-header">
+                <h2>🤖 Chatbot Materi Kuliah</h2>
+                <div class="header-actions">
+                    <button type="button" id="newChatBtn" class="new-chat-btn">+ New Chat</button>
+                    <span class="status-badge">Offline Mode</span>
+                </div>
+            </div>
+            <div class="chat-box" id="chatBox">
+                <div class="message bot-message">
+                    Halo! Aku asisten kuliah lokalmu. Ada materi kuliah yang ingin kamu tanyakan hari ini?
+                </div>
+            </div>
+            <form class="chat-input-area" id="chatForm">
+                <input type="text"
+                       id="userInput"
+                       placeholder="Tanyakan sesuatu tentang materi kuliah..."
+                       autocomplete="off"
+                       required>
+                <button type="submit" id="sendBtn">Kirim</button>
+            </form>
         </div>
-    </div>
+    {% endblock %}
 
-    <div class="chat-box" id="chatBox">
-        <div class="message bot-message">
-            Halo! Aku asisten kuliah lokalmu. Ada materi kuliah yang ingin kamu tanyakan hari ini?
-        </div>
-    </div>
+    {% block extra_js %}
 
-    <form class="chat-input-area" id="chatForm">
-        <input type="text" id="userInput" placeholder="Tanyakan sesuatu tentang materi kuliah..." autocomplete="off" required>
-        <button type="submit" id="sendBtn">Kirim</button>
-    </form>
-</div>
-{% endblock %}
-
-{% block extra_js %}
-    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
-{% endblock %}
+        <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+    {% endblock %}

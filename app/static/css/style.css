@@ -17,11 +17,10 @@
     --success-color: #10B981;
     --danger-color: #EF4444;
     --warning-color: #F59E0B;
-    
     --bg-color: #F8FAFC;          
     --sidebar-bg: #0F172A;        
     --sidebar-text: #F1F5F9;
-    --card-bg: #FFFFFF;
+    --card-bg: #FFF;
     --text-main: #0F172A;
     --text-muted: #64748B;
     --border-color: #E2E8F0;
@@ -41,14 +40,12 @@
     --text-muted: #94A3B8;
     --border-color: #242F47; 
     --sidebar-bg: #060911;
-
     --primary-color: #6366F1;
     --primary-hover: #4F46E5;
     --success-color: #34D399;
     --danger-color: #F87171;
     --warning-color: #FBBF24;
     --secondary-color: #94A3B8;
-    
     --table-padding: 16px 20px;
 }
 
@@ -106,7 +103,7 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 24px 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgb(255 255 255 / 8%);
     height: 75px;
 }
 
@@ -114,7 +111,7 @@ body {
     font-size: 1.25rem;
     font-weight: 700;
     letter-spacing: 0.5px;
-    color: #FFFFFF;
+    color: #FFF;
     transition: opacity var(--transition-speed) ease;
 }
 
@@ -126,8 +123,8 @@ body {
 
 /* Gaya Tombol Toggle */
 .toggle-btn {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgb(255 255 255 / 5%);
+    border: 1px solid rgb(255 255 255 / 10%);
     color: white;
     width: 34px;
     height: 34px;
@@ -141,7 +138,7 @@ body {
 }
 
 .toggle-btn:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgb(255 255 255 / 15%);
 }
 
 /* Modifikasi Header saat Collapsed */
@@ -184,8 +181,8 @@ body {
 }
 
 .sidebar-nav li a:hover {
-    background-color: rgba(255, 255, 255, 0.06);
-    color: #FFFFFF;
+    background-color: rgb(255 255 255 / 6%);
+    color: #FFF;
 }
 
 /* Icon & Text Grid di dalam Link */
@@ -245,25 +242,25 @@ body {
 }
 
 .flash-success {
-    background-color: rgba(16, 185, 129, 0.1);
+    background-color: rgb(16 185 129 / 10%);
     color: var(--success-color);
     border: 1px solid var(--success-color);
 }
 
 .flash-danger {
-    background-color: rgba(239, 68, 68, 0.1);
+    background-color: rgb(239 68 68 / 10%);
     color: var(--danger-color);
     border: 1px solid var(--danger-color);
 }
 
 .flash-warning {
-    background-color: rgba(245, 158, 11, 0.1);
+    background-color: rgb(245 158 11 / 10%);
     color: var(--warning-color);
     border: 1px solid var(--warning-color);
 }
 
 .flash-info {
-    background-color: rgba(79, 70, 229, 0.1);
+    background-color: rgb(79 70 229 / 10%);
     color: var(--primary-color);
     border: 1px solid var(--primary-color);
 }

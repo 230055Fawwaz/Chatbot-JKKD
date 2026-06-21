@@ -6,17 +6,20 @@
     Catatan:
       - Halaman lain memakai HTML ini sebagai template-nya
 -->
-
 <!DOCTYPE html>
 <html lang="id">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %}Chatbot - JJKD{% endblock %}</title>
-        <link rel="stylesheet"
-              href="{{ url_for('static', filename='css/style.css') }}">
-        {% block extra_css %}{% endblock %}
-        <script>
+        <title>
+            {% block title %}Chatbot - JJKD{% endblock %}
+
+            </title>
+            <link rel="stylesheet"
+                  href="{{ url_for('static', filename='css/style.css') }}">
+            {% block extra_css %}{% endblock %}
+
+            <script>
         (function() {
             const savedTheme = localStorage.getItem('theme');
             const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -26,42 +29,43 @@
                 document.documentElement.setAttribute('data-theme', 'light');
             }
         })();
-        </script>
-    </head>
-    <body>
-        <div class="app-container">
-            <aside class="sidebar" id="sidebar">
-                <div class="sidebar-header">
-                    <h2>MyFinance</h2>
-                    <div class="header-buttons">
-                        <button id="theme-toggle" class="toggle-btn" title="Ubah Tema">🌙</button>
-                        <button id="toggle-btn" class="toggle-btn" title="Menu">☰</button>
-                    </div>
-                </div>
-                <nav class="sidebar-nav">
-                    <ul>
-                        <li>
-                            <a href="{{ url_for("main.index") }}">
-                                <span class="nav-icon">📊</span>
-                                <span class="nav-text">New Chat +</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </aside>
-            <main class="main-content">
-                {% with messages = get_flashed_messages(with_categories=true) %}
-                    {% if messages %}
-                        <div class="flash-messages">
-                            {% for category, message in messages %}<div class="flash-message flash-{{ category }}">{{ message }}</div>{% endfor %}
+            </script>
+        </head>
+        <body>
+            <div class="app-container">
+                <aside class="sidebar" id="sidebar">
+                    <div class="sidebar-header">
+                        <h2>MyFinance</h2>
+                        <div class="header-buttons">
+                            <button id="theme-toggle" class="toggle-btn" title="Ubah Tema">🌙</button>
+                            <button id="toggle-btn" class="toggle-btn" title="Menu">☰</button>
                         </div>
-                    {% endif %}
-                {% endwith %}
-                {% block content %}{% endblock %}
-            </main>
-        </div>
-        <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-        <script>
+                    </div>
+                    <nav class="sidebar-nav">
+                        <ul>
+                            <li>
+                                <a href="{{ url_for('main.index') }}">
+                                    <span class="nav-icon">📊</span>
+                                    <span class="nav-text">New Chat +</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </aside>
+                <main class="main-content">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            <div class="flash-messages">
+                                {% for category, message in messages %}<div class="flash-message flash-{{ category }}">{{ message }}</div>{% endfor %}
+                            </div>
+                        {% endif %}
+                    {% endwith %}
+                    {% block content %}{% endblock %}
+
+                </main>
+            </div>
+            <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+            <script>
         const themeToggle = document.getElementById('theme-toggle');
         const updateToggleIcon = (theme) => {
             themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
@@ -75,7 +79,8 @@
             localStorage.setItem('theme', newTheme);
             updateToggleIcon(newTheme);
         });
-        </script>
-        {% block extra_js %}{% endblock %}
-    </body>
-</html>
+            </script>
+            {% block extra_js %}{% endblock %}
+
+        </body>
+    </html>
