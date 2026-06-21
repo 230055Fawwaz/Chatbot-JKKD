@@ -156,3 +156,28 @@
     background: #45475a;
     border-radius: 3px;
 }
+
+/* Gaya untuk Grouping di Header */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Gaya Tombol New Chat */
+.new-chat-btn {
+    background-color: transparent;
+    color: #cba6f7;
+    border: 1px solid #cba6f7;
+    border-radius: 6px;
+    padding: 5px 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.new-chat-btn:hover {
+    background-color: #cba6f7;
+    color: #11111b;
+}
