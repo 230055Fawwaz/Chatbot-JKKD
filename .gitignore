@@ -12,6 +12,7 @@ __pycache__/
 
 # Development
 /node_modules
+/notes
 
 # Distribution / packaging
 .Python
