@@ -6,3 +6,153 @@
    Catatan:
      - Mengatur tampilan halaman chat
    ========================================== */
+
+.chat-container {
+    width: 100%;
+    height: 80vh; /* Sesuaikan tinggi agar muat di dalam blok konten base.html */
+    background-color: #252538;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+/* Header */
+.chat-header {
+    background-color: #11111b;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #313244;
+}
+
+.chat-header h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #cba6f7;
+}
+
+.status-badge {
+    background-color: #a6e3a1;
+    color: #11111b;
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+/* Area Box Chat */
+.chat-box {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: #181825;
+}
+
+/* Gelembung Pesan (Chat Bubbles) */
+.message {
+    max-width: 85%;
+    padding: 14px 18px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    word-wrap: break-word;
+    white-space: pre-wrap; /* PERBAIKAN: pre-wrap menjaga jarak spasi tab dan baris baru buatan AI */
+}
+
+.bot-message {
+    background-color: #313244;
+    color: #cdd6f4;
+    align-self: flex-start;
+    border-bottom-left-radius: 2px;
+}
+
+/* Membuat list (1., 2., dst) di dalam gelembung bot memiliki margin tambahan */
+.bot-message br + br {
+    display: block;
+    margin-top: 8px;
+    content: "";
+}
+
+.user-message {
+    background-color: #89b4fa;
+    color: #11111b;
+    align-self: flex-end;
+    border-bottom-right-radius: 2px;
+}
+
+/* Status Khusus */
+.loading {
+    font-style: italic;
+    color: #a6adc8;
+    background-color: transparent;
+    padding: 5px;
+}
+
+.error {
+    background-color: rgba(243, 139, 168, 0.2);
+    color: #f38ba8;
+    border: 1px solid #f38ba8;
+}
+
+/* Area Input Form */
+.chat-input-area {
+    display: flex;
+    padding: 15px;
+    background-color: #1e1e2e;
+    border-top: 1px solid #313244;
+    gap: 10px;
+    box-sizing: border-box; /* Mencegah overflow ukuran button/input */
+}
+
+.chat-input-area input {
+    flex: 1;
+    background-color: #313244;
+    border: 1px solid #45475a;
+    border-radius: 6px;
+    padding: 12px;
+    color: #cdd6f4;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+    min-width: 0; /* Mencegah input merusak flex container */
+}
+
+.chat-input-area input:focus {
+    border-color: #cba6f7;
+}
+
+.chat-input-area button {
+    background-color: #cba6f7;
+    color: #11111b;
+    border: none;
+    border-radius: 6px;
+    padding: 0 24px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    white-space: nowrap; /* Tombol Kirim tidak akan terlipat teksnya */
+}
+
+.chat-input-area button:hover {
+    background-color: #b4befe;
+}
+
+/* Kustomisasi Scrollbar */
+.chat-box::-webkit-scrollbar {
+    width: 6px;
+}
+.chat-box::-webkit-scrollbar-track {
+    background: transparent;
+}
+.chat-box::-webkit-scrollbar-thumb {
+    background: #45475a;
+    border-radius: 3px;
+}
