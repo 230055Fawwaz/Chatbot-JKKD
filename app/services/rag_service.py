@@ -34,7 +34,7 @@ class RAGService:
     def _cari_konteks(self, pertanyaan, jumlah_hasil=3):
         query_vector = self._get_embedding(pertanyaan)
         if not query_vector: 
-            return ""
+            return "", []
         
         conn = sqlite3.connect(self.db_path)
         conn.enable_load_extension(True)
@@ -42,8 +42,10 @@ class RAGService:
         cursor = conn.cursor()
         
         query_blob = struct.pack(f"{len(query_vector)}f", *query_vector)
+        
+        # PERBAIKAN: Kita ambil juga kolom d.nama_file
         cursor.execute("""
-            SELECT d.konten_teks FROM vektor_chunks v
+            SELECT d.konten_teks, d.nama_file FROM vektor_chunks v
             JOIN dokumen_chunks d ON v.chunk_id = d.id
             WHERE v.embedding MATCH ? AND k = ?
             ORDER BY v.distance ASC;
@@ -52,11 +54,21 @@ class RAGService:
         rows = cursor.fetchall()
         conn.close()
         
-        return "\n\n".join([row[0] for row in rows])
+        # Gabungkan teks untuk konteks AI
+        konteks_utuh = "\n\n".join([row[0] for row in rows])
+        
+        # Ambil daftar nama file yang unik (menggunakan set agar tidak duplikat)
+        daftar_sumber = list(set([row[1] for row in rows]))
+        
+        return konteks_utuh, daftar_sumber
 
     def tanya(self, pertanyaan):
-        konteks = self._cari_konteks(pertanyaan)
+        # Mengambil konteks teks DAN daftar sumber file
+        konteks, daftar_sumber = self._cari_konteks(pertanyaan)
         
+        if not konteks:
+            return "Maaf, saya tidak menemukan materi kuliah yang relevan.", []
+            
         prompt_sistem = (
             "Anda adalah asisten dosen yang pintar. Jawablah pertanyaan mahasiswa "
             "HANYA berdasarkan konteks materi kuliah yang diberikan di bawah ini. "
@@ -76,6 +88,8 @@ class RAGService:
         
         try:
             response = requests.post(self.chat_url, json=payload)
-            return response.json()['message']['content']
+            jawaban_ai = response.json()['message']['content']
+            # Kembalikan jawaban beserta daftar sumbernya
+            return jawaban_ai, daftar_sumber
         except Exception as e:
-            return f"Gagal terhubung ke Qwen lokal: {e}"
+            return f"Gagal terhubung ke Qwen lokal: {e}", []
