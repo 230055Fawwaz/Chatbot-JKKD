@@ -11,10 +11,12 @@ from flask import Flask
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 
+
 @app.after_request
 def add_header(response):
     response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
     return response
+
 
 # ====================================================
 # PROSES REGISTRASI BLUEPRINT BARU DI SINI
