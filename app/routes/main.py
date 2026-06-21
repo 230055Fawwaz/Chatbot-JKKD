@@ -9,7 +9,6 @@
 
 from flask import Blueprint, render_template, request, jsonify, Response
 from app.services.rag_service import RAGService
-import json
 
 main_bp = Blueprint("main", __name__)
 rag_service = RAGService()
