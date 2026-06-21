@@ -43,8 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
             hapusLoading(loadingId);
 
             if (data.status === 'success') {
-                // 4. Tampilkan jawaban dari Qwen RAG
-                tampilkanPesan(data.reply, 'bot-message');
+                // Tampilkan jawaban utama dari Qwen
+                tampilkanPesan(data.reply, 'bot-message', data.sources);
             } else {
                 tampilkanPesan('Waduh, ada masalah di server lokal.', 'bot-message error');
             }
@@ -56,12 +56,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    function tampilkanPesan(teks, tipeKelas) {
+    function tampilkanPesan(teks, tipeKelas, sources = []) {
         const pesanDiv = document.createElement('div');
         pesanDiv.className = `message ${tipeKelas}`;
         
-        // PERBAIKAN: Gunakan textContent untuk keamanan, namun kita pastikan CSS menghandle baris barunya
-        pesanDiv.textContent = teks;
+        // Buat element penampung teks utama
+        const teksSpan = document.createElement('span');
+        teksSpan.textContent = teks;
+        pesanDiv.appendChild(teksSpan);
+        
+        // JIKA ada data sumber dokumen, tampilkan di bawah teks utama
+        if (sources && sources.length > 0) {
+            const sumberDiv = document.createElement('div');
+            sumberDiv.style.fontSize = '0.78rem';
+            sumberDiv.style.color = '#a6adc8';
+            sumberDiv.style.marginTop = '8px';
+            sumberDiv.style.borderTop = '1px solid #45475a';
+            sumberDiv.style.paddingTop = '4px';
+            
+            // Gabungkan nama file dengan koma
+            sumberDiv.innerHTML = `📚 <strong>Sumber materi:</strong> ${sources.join(', ')}`;
+            pesanDiv.appendChild(sumberDiv);
+        }
         
         // Jika tipeKelas memuat loading status
         if (tipeKelas.includes('loading')) {
@@ -71,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
             gulungKeBawah();
             return idUnique;
         }
-    
+
         chatBox.appendChild(pesanDiv);
         gulungKeBawah();
     }

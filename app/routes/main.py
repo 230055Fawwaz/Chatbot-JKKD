@@ -26,10 +26,11 @@ def chat_api():
     if not pesan_user.strip():
         return jsonify({'status': 'error', 'reply': 'Pesan tidak boleh kosong.'}), 400
         
-    # Jalankan logika RAG
-    jawaban_ai = rag_service.tanya(pesan_user)
+    # Jalankan logika RAG (menghasilkan jawaban dan list sumber)
+    jawaban_ai, daftar_sumber = rag_service.tanya(pesan_user)
     
     return jsonify({
         'status': 'success',
-        'reply': jawaban_ai
+        'reply': jawaban_ai,
+        'sources': daftar_sumber # Ditambahkan ke response JSON
     })
