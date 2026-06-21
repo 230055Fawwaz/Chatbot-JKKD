@@ -11,23 +11,23 @@ REM ==========================================
 setlocal enabledelayedexpansion
 cls
 
-:: 1. Membuat folder "notes" jika belum ada
-if not exist "notes" mkdir "notes"
+:: 1. Membuat folder "notes\python" jika belum ada
+if not exist "notes\python" mkdir "notes\python"
 
-:: 2. Mencari nomor urut terakhir yang tersedia di folder notes
+:: 2. Mencari nomor urut terakhir yang tersedia di folder notes\python
 set COUNTER=1
 :loop
 :: Mengubah angka satuan menjadi format 3 digit (misal: 1 -> 001, 15 -> 015)
 set "PAD=000%COUNTER%"
 set "DIGIT=%PAD:~-3%"
 
-if exist "notes\laporan_pembersihan_%DIGIT%.txt" (
+if exist "notes\python\laporan_pembersihan_%DIGIT%.txt" (
     set /a COUNTER+=1
     goto loop
 )
 
-:: 3. Mengatur variabel file laporan ke folder notes dengan format 3 digit
-set REPORT_FILE=notes\laporan_pembersihan_%DIGIT%.txt
+:: 3. Mengatur variabel file laporan ke folder notes\python dengan format 3 digit
+set REPORT_FILE=notes\python\laporan_pembersihan_%DIGIT%.txt
 
 echo =================================================== > "%REPORT_FILE%"
 echo   LAPORAN PEMBERSIHAN KODE PYTHON (#%DIGIT%) - %DATE% %TIME%     >> "%REPORT_FILE%"
