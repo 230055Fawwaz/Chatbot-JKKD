@@ -7,31 +7,16 @@
      - Mengatur tampilan halaman chat
    ========================================== */
 
-   /* app/static/css/chat.css */
-
-/* Reset & Container Utama */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #1e1e2e;
-    color: #cdd6f4;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
 .chat-container {
     width: 100%;
-    max-width: 800px;
-    height: 85vh;
+    height: 80vh; /* Sesuaikan tinggi agar muat di dalam blok konten base.html */
     background-color: #252538;
     border-radius: 12px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    margin: 0 auto;
 }
 
 /* Header */
@@ -72,13 +57,13 @@ body {
 
 /* Gelembung Pesan (Chat Bubbles) */
 .message {
-    max-width: 75%;
-    padding: 12px 16px;
+    max-width: 85%;
+    padding: 14px 18px;
     border-radius: 8px;
     font-size: 0.95rem;
-    line-height: 1.5;
+    line-height: 1.6;
     word-wrap: break-word;
-    white-space: pre-line; /* Menjaga struktur paragraf baru dari AI */
+    white-space: pre-wrap; /* PERBAIKAN: pre-wrap menjaga jarak spasi tab dan baris baru buatan AI */
 }
 
 .bot-message {
@@ -86,6 +71,13 @@ body {
     color: #cdd6f4;
     align-self: flex-start;
     border-bottom-left-radius: 2px;
+}
+
+/* Membuat list (1., 2., dst) di dalam gelembung bot memiliki margin tambahan */
+.bot-message br + br {
+    display: block;
+    margin-top: 8px;
+    content: "";
 }
 
 .user-message {
@@ -104,8 +96,9 @@ body {
 }
 
 .error {
-    background-color: #f38ba8;
-    color: #11111b;
+    background-color: rgba(243, 139, 168, 0.2);
+    color: #f38ba8;
+    border: 1px solid #f38ba8;
 }
 
 /* Area Input Form */
@@ -115,8 +108,51 @@ body {
     background-color: #1e1e2e;
     border-top: 1px solid #313244;
     gap: 10px;
+    box-sizing: border-box; /* Mencegah overflow ukuran button/input */
 }
 
 .chat-input-area input {
     flex: 1;
+    background-color: #313244;
+    border: 1px solid #45475a;
+    border-radius: 6px;
+    padding: 12px;
+    color: #cdd6f4;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+    min-width: 0; /* Mencegah input merusak flex container */
+}
+
+.chat-input-area input:focus {
+    border-color: #cba6f7;
+}
+
+.chat-input-area button {
+    background-color: #cba6f7;
+    color: #11111b;
+    border: none;
+    border-radius: 6px;
+    padding: 0 24px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    white-space: nowrap; /* Tombol Kirim tidak akan terlipat teksnya */
+}
+
+.chat-input-area button:hover {
+    background-color: #b4befe;
+}
+
+/* Kustomisasi Scrollbar */
+.chat-box::-webkit-scrollbar {
+    width: 6px;
+}
+.chat-box::-webkit-scrollbar-track {
+    background: transparent;
+}
+.chat-box::-webkit-scrollbar-thumb {
+    background: #45475a;
+    border-radius: 3px;
 }

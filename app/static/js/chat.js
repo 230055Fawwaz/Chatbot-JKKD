@@ -59,9 +59,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function tampilkanPesan(teks, tipeKelas) {
         const pesanDiv = document.createElement('div');
         pesanDiv.className = `message ${tipeKelas}`;
-        pesanDiv.innerText = teks;
         
-        // Berikan ID acak jika ini status loading agar mudah dihapus nanti
+        // PERBAIKAN: Gunakan textContent untuk keamanan, namun kita pastikan CSS menghandle baris barunya
+        pesanDiv.textContent = teks;
+        
+        // Jika tipeKelas memuat loading status
         if (tipeKelas.includes('loading')) {
             const idUnique = 'load-' + Date.now();
             pesanDiv.id = idUnique;
@@ -69,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
             gulungKeBawah();
             return idUnique;
         }
-
+    
         chatBox.appendChild(pesanDiv);
         gulungKeBawah();
     }
