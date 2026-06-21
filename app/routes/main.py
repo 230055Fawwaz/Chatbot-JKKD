@@ -7,8 +7,9 @@
 #   - Rute hanya menampilkan halaman saja beserta data di dalamnya
 # ==========================================
 
-from flask import Blueprint, render_template, request, jsonify
+from flask import Blueprint, render_template, request, jsonify, Response
 from app.services.rag_service import RAGService
+import json
 
 main_bp = Blueprint('main', __name__)
 rag_service = RAGService()
@@ -26,11 +27,8 @@ def chat_api():
     if not pesan_user.strip():
         return jsonify({'status': 'error', 'reply': 'Pesan tidak boleh kosong.'}), 400
         
-    # Jalankan logika RAG (menghasilkan jawaban dan list sumber)
-    jawaban_ai, daftar_sumber = rag_service.tanya(pesan_user)
-    
-    return jsonify({
-        'status': 'success',
-        'reply': jawaban_ai,
-        'sources': daftar_sumber # Ditambahkan ke response JSON
-    })
+    # Mengembalikan Response berupa stream langsung dari generator RAG
+    return Response(
+        rag_service.tanya(pesan_user), 
+        mimetype='text/event-stream'
+    )
