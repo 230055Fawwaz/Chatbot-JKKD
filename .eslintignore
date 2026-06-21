@@ -1,0 +1,4 @@
+# Mengabaikan folder pustaka pihak ketiga
+node_modules/
+**/static/js/vendor/
+**/*chart*.js

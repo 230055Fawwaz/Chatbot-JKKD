@@ -1,0 +1,4 @@
+# Jangan rapikan Chart.js atau file eksternal
+node_modules/
+**/static/js/vendor/
+**/*chart*.js
