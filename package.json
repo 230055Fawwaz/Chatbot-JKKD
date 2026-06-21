@@ -1,23 +1,26 @@
 {
-  "name": "myfinance",
+  "name": "chatbot-jkkd",
   "version": "1.0.0",
-  "description": "",
+  "description": "Chatbot untuk proyek JKKD",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/230055Fawwaz/MyFinance.git"
+    "url": "git+https://github.com/230055Fawwaz/Chatbot-JKKD.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "chatbot",
+    "jkkd"
+  ],
+  "author": "Fawwaz",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/230055Fawwaz/MyFinance/issues"
+    "url": "https://github.com/230055Fawwaz/Chatbot-JKKD/issues"
   },
-  "homepage": "https://github.com/230055Fawwaz/MyFinance#readme",
+  "homepage": "https://github.com/230055Fawwaz/Chatbot-JKKD#readme",
   "devDependencies": {
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^10.1.8",
