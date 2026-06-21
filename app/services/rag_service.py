@@ -13,6 +13,7 @@ import struct
 import requests
 import sqlite_vec
 import os
+import json
 
 class RAGService:
     def __init__(self):
@@ -63,11 +64,12 @@ class RAGService:
         return konteks_utuh, daftar_sumber
 
     def tanya(self, pertanyaan):
-        # Mengambil konteks teks DAN daftar sumber file
         konteks, daftar_sumber = self._cari_konteks(pertanyaan)
         
         if not konteks:
-            return "Maaf, saya tidak menemukan materi kuliah yang relevan.", []
+            # Mengembalikan format JSON string mini khusus untuk dibaca frontend
+            yield f"data: {json.dumps({'type': 'text', 'content': 'Maaf, materi tidak ditemukan.'})}\n\n"
+            return
             
         prompt_sistem = (
             "Anda adalah asisten dosen yang pintar. Jawablah pertanyaan mahasiswa "
@@ -83,13 +85,22 @@ class RAGService:
                 {"role": "system", "content": prompt_sistem},
                 {"role": "user", "content": prompt_user}
             ],
-            "stream": False
+            "stream": True # AKTIFKAN STREAMING
         }
         
+        # Kirim daftar sumber di awal stream agar frontend tahu file referensinya
+        yield f"data: {json.dumps({'type': 'sources', 'content': daftar_sumber})}\n\n"
+        
         try:
-            response = requests.post(self.chat_url, json=payload)
-            jawaban_ai = response.json()['message']['content']
-            # Kembalikan jawaban beserta daftar sumbernya
-            return jawaban_ai, daftar_sumber
+            # Gunakan stream=True pada requests Python
+            response = requests.post(self.chat_url, json=payload, stream=True)
+            
+            for line in response.iter_lines():
+                if line:
+                    chunk_data = json.loads(line.decode('utf-8'))
+                    token = chunk_data.get('message', {}).get('content', '')
+                    if token:
+                        # Kirim potongan kata ke frontend dengan format Server-Sent Events (SSE)
+                        yield f"data: {json.dumps({'type': 'token', 'content': token})}\n\n"
         except Exception as e:
-            return f"Gagal terhubung ke Qwen lokal: {e}", []
+            yield f"data: {json.dumps({'type': 'text', 'content': f'Gagal: {e}'})}\n\n"
