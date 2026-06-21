@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const chatForm = document.getElementById('chatForm');
     const userInput = document.getElementById('userInput');
     const chatBox = document.getElementById('chatBox');
+    const newChatBtn = document.getElementById('newChatBtn');
 
     chatForm.addEventListener('submit', async (e) => {
         e.preventDefault(); // Mencegah page reload
@@ -54,6 +55,15 @@ document.addEventListener('DOMContentLoaded', () => {
             hapusLoading(loadingId);
             tampilkanPesan('Gagal terhubung ke server Flask. Pastikan Flask menyala.', 'bot-message error');
         }
+    });
+
+    newChatBtn.addEventListener('click', () => {
+        // 1. Kosongkan seluruh isi chatBox
+        chatBox.innerHTML = '';
+
+        // 2. Tampilkan kembali pesan sambutan awal dari bot
+        const pesanAwal = "Halo! Aku asisten kuliah lokalmu. Ada materi kuliah yang ingin kamu tanyakan hari ini?";
+        tampilkanPesan(pesanAwal, 'bot-message');
     });
 
     function tampilkanPesan(teks, tipeKelas, sources = []) {
